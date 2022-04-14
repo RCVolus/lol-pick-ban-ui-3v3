@@ -3,7 +3,6 @@ import cx from 'classnames';
 import Pick from "./Pick";
 
 import css from './style/index.module.scss';
-import Ban from "./Ban";
 
 import logo from '../assets/Logo_Itemania_2019.png';
 
@@ -46,30 +45,22 @@ export default class Overlay extends React.Component {
 
         console.log(state);
 
-        const renderBans = (teamState) =>{
-            const list =  teamState.bans.map((ban, idx) => <Ban key={`ban-${idx}`} {...ban} />);
-            list.splice(3, 0, <div key="ban-spacer" className={css.Spacing} />);
-            return <div className={cx(css.BansBox)}>{list}</div>;
-        };
-
         const renderTeam = (teamName, teamConfig, teamState) => (
             <div className={cx(css.Team, teamName)}>
                 <div className={cx(css.Picks)}>
-                    {teamState.picks.map((pick, idx) => <Pick key={`pick-${idx}`} config={this.props.config} {...pick} />)}
+                    {teamState.picks.map((pick, idx) => idx < 3 ? <Pick key={`pick-${idx}`} config={this.props.config} {...pick} /> : '')}
                 </div>
                 <div className={css.BansWrapper}>
                     <div className={cx(css.Bans, {[css.WithScore]: config.frontend.scoreEnabled})}>
                         {teamName === css.TeamBlue && config.frontend.scoreEnabled && <div className={css.TeamScore}>
                             {teamConfig.score}
                         </div>}
-                        {teamName === css.TeamRed && renderBans(teamState)}
                         <div className={cx(css.TeamName, {[css.WithoutCoaches]: !config.frontend.coachesEnabled})}>
                             {teamConfig.name}
                             {config.frontend.coachesEnabled && <div className={css.CoachName}>
                                 Coach: {teamConfig.coach}
                             </div>}
                         </div>
-                        {teamName === css.TeamBlue && renderBans(teamState)}
                         {teamName === css.TeamRed && config.frontend.scoreEnabled && <div className={css.TeamScore}>
                             {teamConfig.score}
                         </div>}

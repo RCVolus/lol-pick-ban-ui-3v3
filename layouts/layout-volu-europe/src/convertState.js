@@ -1,11 +1,6 @@
 import banImg from "./assets/ban_placeholder.svg";
-import topSplash from "./assets/top_splash_placeholder.svg";
-import jungSplash from "./assets/jung_splash_placeholder.svg";
-import midSplash from "./assets/mid_splash_placeholder.svg";
-import botSplash from "./assets/bot_splash_placeholder.svg";
-import supSplash from "./assets/sup_splash_placeholder.svg";
+import emptySplash from "./assets/empty_splash_placeholder.svg";
 
-const pickSplashes = [topSplash, jungSplash, midSplash, botSplash, supSplash];
 
 const makeUrlAbsolute = (url, backendUrl) => {
   if (!url || !url.startsWith('/cache')) {
@@ -26,7 +21,7 @@ const putPlaceholders = (team,  backendUrl) => {
       // Does not exists, push
       team.picks.push({
         champion: {
-          loadingImg: pickSplashes[i]
+          loadingImg: emptySplash
         }
       });
     } else {
@@ -34,7 +29,7 @@ const putPlaceholders = (team,  backendUrl) => {
       const pick = team.picks[i];
       if (!pick.champion || !pick.champion.loadingImg) {
         pick.champion = {
-          loadingImg: pickSplashes[i]
+          loadingImg: emptySplash
         };
         // pick.spell1 = null;
         // pick.spell2 = null;
