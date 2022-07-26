@@ -1,3 +1,6 @@
+# DISCLAIMER
+This is just a hacky modification of the regular Pick & Ban UI and is not actively maintained.
+
 # lol-champselect-ui
 UI to display the league of legends champion selection in esports tournaments.
 
